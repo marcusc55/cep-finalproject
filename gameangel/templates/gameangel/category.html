@@ -1,0 +1,30 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}{{ category_name }}{% endblock %}
+{%block body_block%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <title>Game Angel</title>
+    </head>
+
+    <body>
+        <h2>{{ category_name }}</h2>
+        {% if category %}
+            {% if pages %}
+            <ul class="list-group">
+                {% for page in pages %}
+                <a class="list-group-item" href="{{ page.url }}">{{ page.title }}</a>
+                {% endfor %}
+            </ul>
+            {% else %}
+								<strong>No pages currently in category.</strong><br />
+            {% endif %}
+						<a button class="btn btn-primary" href="/gameangel/category/{{category_name}}/add_page">Add a New Page</a>
+        {% else %}
+            <div class="alert alert-danger" role="alert"> The specified category {{ category_name }} does not exist!</div>
+        {% endif %}
+    </body>
+</html>
+{%endblock%}

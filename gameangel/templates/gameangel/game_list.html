@@ -1,0 +1,9 @@
+<ul>
+{% if game_list %}  
+  {% for game in game_list %}
+    <li><a href="Game/{{ game.title }}">{{ game.title }}</a></li>
+  {% endfor %}
+{%else%}
+    <li>No games at present that starts with {{sw}}</li>
+{% endif %}
+</ul>

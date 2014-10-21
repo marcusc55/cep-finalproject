@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Angel</title>
+
+    <!-- Bootstrap -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'gameangel/mycss.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <STYLE type="text/css">
+      body{
+       background-image:url("{%static 'geometry2.png' %}");
+       background-repeat:repeat
+      }
+    </STYLE>
+    </head>
+  
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top my-navbar">
+      <div class="container">
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li></li>
+              <li class="navbar-text">Welcome, {{ user.username }}!</li>
+              <li class="navbar-link"><a href="/gameangel/logout/">Logout</a></li>
+            {% else %}
+              <li class="navbar-link"><a href="/gameangel/register/">Register</a></li>
+              <li class="navbar-link"><a href="/gameangel/login/">Login</a></li>
+            {% endif %}
+          </ul>
+          <ul class="nav navbar-nav navbar-left">
+             <li class="brand"><img src="{% static 'new_icon.png' %}" width=auto height="55" alt=""></li>
+             <!--  <li class="navbar-link"><a href="/gameangel/"><img class="navbar-pic" src="{% static 'footerlogo.png' %}"></a></li>--->
+            {% if user.is_authenticated %}
+            <li class="navbar-link"><a href="/gameangel">Home</a></li>
+            <li class="navbar-link"><a href="/gameangel/add_game/">Add Game</a></li>
+            
+              {% endif %}
+              </ul>
+          
+        </div> 
+      </div>
+    </nav>  
+    
+    <div>
+      {% block body_block%}
+      {% endblock%}
+    </div>  
+    
+    <footer>
+      <div id="footer" style="margin-top:5%">
+        <div class="footer1">
+          Game Angel 2014
+          <p>Created by: Zeng Jiexiong, Marcus Choo, Benjamin Yong, Thirumalaiappan Muthukumaraswamy</p>
+        </div>
+      </div>
+    </footer>
+    
+  </body>
+
+  
+
+  
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <script src="{% static 'js/search-ajax.js'%}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+
+
+</html>
+
+                  

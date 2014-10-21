@@ -1,0 +1,26 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}{{ category_name }}{% endblock %}
+{%block body_block%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <title>Game Angel</title>
+    </head>
+
+    <body>
+        <div class="container">
+        <form class="form-signin" style="margin: 190px" role="form" id="login_form" method="post" action="/gameangel/login/" >
+          <h2 class="form-signin-heading">Please sign in</h2>
+            {% csrf_token %}
+            <input type="text" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;" class="form-control" placeholder="Username" name="username" value="" size="50" required autofocus/>
+            <input type="password"  style="border-top-right-radius: 0; border-top-left-radius: 0;" class="form-control" placeholder="Password" name="password" value="" size="50" />
+            <br />
+
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login" />
+        </form>
+    </body>
+</html>
+{%endblock%}

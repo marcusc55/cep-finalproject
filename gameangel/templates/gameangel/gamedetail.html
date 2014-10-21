@@ -1,0 +1,55 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}{{ Game.title }}{% endblock %}
+{%block body_block%}
+{%load staticfiles%}
+<html>
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <title>Game Angel</title>
+        <link rel="stylesheet" href="{% static '/fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
+        <script type="text/javascript" src="{% static '/fancybox/source/jquery.fancybox.pack.js'%}"></script>
+    </head>
+
+    <body>
+    {% if Game %}
+      <div class="jumbotron gameDetailJumbotron">
+        <div class="jumbotronImage" style='background:url({%static "gamedetailbkgrnd.jpg"%});'><h1 class="jumbotronText">GAMES</h1></div>
+      </div>
+      <div class="container">
+        <div class="col-md-4">
+          <img class="gameIcon" src= "media/{{Game.icon}}">
+        </div>
+        <div class="col-md-8">
+          <h1>{{Game.title}}</h1>
+          <h3>Developer:</h3>
+          <blockquote><h4 style="color:	#333333">{{Game.developer}}</h4></blockquote>
+          <h3>Description:</h3>
+          <blockquote><h4 style="color:	#333333">{{Game.description}}</h4></blockquote>
+          <h3>Link:</h3>
+          <blockquote><h4><a href="{{Game.link}}" style="color:	#333333">{{Game.link}}</a></h4></blockquote>
+          <h3>Photos:</h3>
+          
+          <img class="gameimg" src= "media/{{Game.picture_1}}">
+          <img class="gameimg" src= "media/{{Game.picture_2}}">
+          <img class="gameimg" src= "media/{{Game.picture_3}}">
+          
+          <h3>Comments</h3>
+          <blockquote><ul>
+          {% if comment_list %}
+            {% for comment in comment_list %}
+              <h3>{{comment.author_alias}}</h3>
+              <h4>{{comment.comment}}</h4>
+            {%endfor%}
+          {%else%}
+              <h4>There are no comments currently.</h4>
+          {% endif %}
+          </ul>
+        <button><h4><a href="/gameangel/add_comment/">Add Comment</a></h4></button>
+          </blockquote>
+         </div>
+      </div>
+    </body>
+</html>
+{%endif%}
+{%endblock%}

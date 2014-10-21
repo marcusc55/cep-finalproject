@@ -1,0 +1,41 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}{{ category_name }}{% endblock %}
+{%block body_block%}
+{%load staticfiles%}
+
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div class="jumbotron gameDetailJumbotron">
+  <div class="jumbotronImage" style='background:url({%static "addcommentbkgrnd.jpg"%});'><h1 class="jumbotronText">ADD A COMMENT</h1></div>
+</div>
+
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2">
+
+        <h2>Add a Comment</h2>
+
+        <form id="category_form" method="post" action="/gameangel/add_comment/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field |addcss:"class:form-control" }}          
+                </div>
+            {% endfor %}
+
+          <button class="btn btn-primary" type="submit" name="submit">Add Comment</button>
+        </form>
+    </div>
+  </div>
+  
+{%endblock%}

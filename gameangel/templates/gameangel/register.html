@@ -1,0 +1,53 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}"Index"{% endblock %}
+{%block body_block%}
+{%load staticfiles%}
+<!DOCTYPE html>
+<html>
+    <head>
+      <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <title>Game Angel</title>
+    </head>
+
+    <body>
+      <div class="jumbotron gameDetailJumbotron">
+        <div class="jumbotronImage" style='background:url({%static "registerbkgrnd.jpg"%});'><h1 class="jumbotronText">REGISTER</h1></div>
+      </div>
+      <div class="container">
+      <div class="col-md-8 col-md-offset-2 registerblock">
+        <h1>Register with Game Angel</h1>
+
+        {% if registered %}
+           <h3>Thank you for registering!</h3><br />
+         <a href="/gameangel/" class="btn btn-lg btn-success">Return to the homepage.</a><br />
+        {% else %}
+        <form class="form-signin" style="margin-top: 30px" id="user_form" method="post" action="/gameangel/register/"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {% for field in user_form %}
+                {{ field.errors }}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field |addcss:"class:form-control" }}          
+                </div>
+            {% endfor %}
+          
+          {% for field in profile_form %}
+                {{ field.errors }}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field |addcss:"class:form-control" }}          
+                </div>
+            {% endfor %}
+
+            <!-- Provide a button to click to submit the form. -->
+            <input class="btn btn-lg btn-success btn-block" type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
+       </div>
+      </div>
+    </body>
+</html>
+{%endblock%}

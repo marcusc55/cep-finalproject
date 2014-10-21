@@ -1,0 +1,206 @@
+{% extends 'gameangel/base.html' %}
+{%load newfilters%}
+{% block title %}{{ game_name }}{% endblock %}
+{%block body_block%}
+{%load staticfiles%}
+<head>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+</head>
+   <body>
+      
+        {% if user.is_authenticated %}
+        {% if Games %}
+      
+          <!-- Carousel
+    ================================================== -->
+  <style>
+    .item{
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: :auto;
+      max-width: none;
+    }
+    
+    
+    
+    .Margins{
+     margin-top:400px;
+    }
+    
+    .carousel img {
+      width:60%;
+      z-index:-11;
+      max-width: none;
+    }
+    
+    .box {
+      background-color:#FFFFFF
+    }
+
+    </style>
+      
+
+
+    
+    <div class="jumbotron gameDetailJumbotron">
+      <div class="jumbotronImage" style='background:url({%static "indexbkground.jpg"%});'></div>
+    </div>
+     
+     
+     
+     <div class="container" align="center">
+        <!--div class="col-lg-12"-->
+     <div id="accordion" align="center">
+   <div class="container" align="center">
+    <img class="searchicon" src="{%static 'twitter.png'%}">
+  </div>
+  <div>
+   <div>
+      <div class = "twitterforum1" style="float:right;">   
+        <a class="twitter-timeline"
+          width= "100%"
+          height="300"
+          href="https://twitter.com/twitterdev"
+          data-widget-id=524116225480081408>
+        </a>
+      <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+      </script>
+      </div>
+  
+      <div class = "twitterforum2" style="margin-right:2%;float:right;">
+        <a class="twitter-timeline"
+          width= "100%"
+          height="300"
+          href="https://twitter.com/twitterdev"
+          data-widget-id=524119663035158528>
+        </a>
+       <script type="text/javascript">
+      window.twttr = (function (d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id; js.src= "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+      }(document, "script", "twitter-wjs"));
+        </script>
+        </div>
+      
+      </div>
+  </div>
+  <div class="container" align="center">
+    <img class="searchicon" src="{%static 'search_icon.png'%}">
+  </div>
+  <div>
+    <div class="container auto-width" align="center">
+        <div class="form-group">
+                <form>
+                    {% csrf_token %}    
+                 
+                    <li><input class="form-control" type="text" name="suggestion" value="" id="suggestion" /></li>
+                </form>
+            </div>            
+            <div id="cats">
+              {% if game_list %}
+                            {% include 'gameangel/game_list.html' with game_list=game_list %}
+              {% endif %}
+            </div>
+       </div>
+  </div>
+ </div>
+</div>
+<!--/div-->
+     
+     
+
+      
+       
+             {% else %}
+                  <strong>There are no games present.</strong>
+             {% endif %}
+      <br/><br/><br/>
+      
+      <div class="container">
+          <div class="col-lg-12">
+          {% for Game in Games %}     
+          <div class="col-lg-12 no-padding" style="background-color:#FFFFFF; margin-bottom:60px;">
+            <div class="col-lg-4" style="padding:3%;">
+              <h2>{{Game.title}}<br/>
+              <small>Made by: {{Game.developer}}</small></h2>
+              <h4 style="color:#333333">{{Game.description|slice:":200" }}...</h4>
+              <div class="details"><p><a class="btn btn-default" href="Game/{{Game.title}}/" role="button">View details &raquo;</a></p></div>
+            </div>
+            <div class="col-lg-8 no-padding" style="paddding:0px;border:0px;margin:0px;">
+              {%if Game.picture_1 %}
+              <img src="media/{{Game.picture_1}}" style="width:100%; height:auto">
+              {%endif%}
+            </div>
+         </div>
+                      
+                    
+                    {% endfor %}
+    
+        </div>
+						<!--<div class="btn-group">
+								<a class="btn btn-info" href="/gameangel/restricted/">Restricted Page</a>
+								<a class="btn btn-success" href="/gameangel/add_game/">Add a New Game</a>
+								<a class="btn btn-danger" href="/gameangel/logout/">Logout</a>
+						</div>-->
+        {% else %}
+        <div class="jumbotron startJumbotron">
+          <div class="startJumbotronImage" style='background:url({%static "startimg.jpg"%});'>
+            <div class="start-text">
+              <h1>WELCOME TO GAME ANGEL</h1>
+              <h2>A game portal for aspiring developers</h2><br>
+              <div class="btn-group btn-group-lg">
+								<a class="btn btn-primary btn-lg" href="/gameangel/register/">Sign up now</a>
+            		<a class="btn btn-success btn-lg" href="/gameangel/login/">Login</a>
+						  </div>
+            </div>
+          </div>
+        </div>
+        <div class="start-sub" align="center">
+          <div class="container start-ct">
+            <div class="col-md-4" align="center">
+              <img src="{%static 'feedback.png' %}"><h3>Get feedback</h3><h4>On Game Angel, other users can comment on your game and provide feedback.</h4>
+            </div>
+            <div class="col-md-4" align="center">
+              <img src="{%static 'attention.png' %}"><h3>Garner attention</h3><h4>Your games are featured on the homepage and other users can easily search for games.</h4>
+            </div>
+            <div class="col-md-4" align="center">
+              <img src="{%static 'ideas.png' %}"><h3>Circulate ideas</h3><h4>Discussion threads are available and you can even comment with your Twitter account!</h4>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+       
+     <script type="text/javascript">
+    <!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+    
+    $( "#accordion" ).accordion({heightStyle:"content", collapsible:"true", active:"false"});
+    //-->
+    </script>
+        
+        
+        
+    </body>
+</html>
+{%endblock%}
